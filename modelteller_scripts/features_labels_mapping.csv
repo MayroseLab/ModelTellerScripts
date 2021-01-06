@@ -1,0 +1,93 @@
+,label
+ac_subs,AC substitutions
+ag_subs,AG substitutions
+aln_entropy,MSA entropy
+at_subs,AT substitutions
+avg_colless_idx,Colless index
+avg_sackin_idx,Sackin index
+base_freqs_entropy,Base frequencies entropy
+bollback_multinomial,Multinomial test statistic
+cg_subs,CG substitutions
+colless_idx,Colless index
+ct_subs,CT substitutions
+entropy_bl,Branch lengths (entropy)
+entropy_diam,Tree diameters (entropy)
+entropy_diam_cnt,# Branches in diameter (entropy)
+fA,A frequency
+fC,C frequency
+fG,G frequency
+frac_cherries,Fraction of cherries
+frac_unique_patterns,% Parallel site-patterns
+frac_unique_sites,% Different site-patterns
+freq_A,A frequency
+freq_C,C frequency
+freq_G,G frequency
+freq_T,T frequency
+fT,T frequency
+gamma,Gamma parameter
+gt_subs,GT subsitutions
+logL,logL
+max_bl,Branch lengths (max)
+max_diam,Tree diameters (max)
+max_diam_cnt,# Branches in diameter (max)
+mean_bl,Branch lengths (avg)
+mean_diam,Tree diameters (avg)
+mean_diam_cnt,# Branches in diameter (avg)
+min_bl,Branch lengths (min)
+min_diam,Tree diameters (min)
+min_diam_cnt,# Branches in diameter (min)
+model_F,model_F
+model_G,model_G
+model_I,model_I
+model_matrix,model_matrix
+mu_rate,# Substitutions per unit time
+n_cherries,# cherries
+n_ind_seqs,n_ind_seqs
+n_ind_seqs_mid,n_ind_seqs_mid
+n_unique_patterns,# Parallel site-patterns
+n_unique_sites,# Different site-patterns
+nchars,# MSA sites
+ntaxa,# MSA sequences
+parsimony,Parsimony
+pInv,pInv parameter
+pinv_sites_100p,% Fully conserved sites
+pinv_sites_60p,60%-conserved sites frequency
+pinv_sites_80p,80%-conserved sites frequency
+pinv_sites_90p,90%-conserved sites frequency
+pinv_sites_95p,95%-conserved sites frequency
+random_feature,random_feature
+rmsa_bb_multinomial,Ingroup MSA - multinomial test statistic
+rmsa_entropy,Ingroup MSA - MSA entropy
+rmsa_frac_unique_patterns,Ingroup MSA - % Parallel site-patterns
+rmsa_frac_unique_sites,Ingroup MSA - % Different site-patterns
+rmsa_n_unique_patterns,Ingroup MSA - # Parallel site-patterns
+rmsa_n_unique_sites,Ingroup MSA - # Different site-patterns
+rmsa_outgroup_size,Outgroup size
+rmsa_pInv,Ingroup MSA - %fully conserved sites
+sackin_idx,Sackin index
+sop_score,SOP score
+std_bl,Branch lengths (std)
+std_diam,Tree diameters (std)
+std_diam_cnt,# Branches in diameter (std)
+stemminess_idx,Stemminess index
+stemminess85_idx,Cumulative stemminess index
+stemminess90_idx,Noncumulative stemminess index
+subAA,subAA
+subAC,subAC
+subAG,A-G substitution rate
+subAT,subAT
+subCA,C-A substitution rate
+subCC,C-C substitution rate
+subCG,C-G substitution rate
+subCT,subCT
+subGA,subGA
+subGC,subGC
+subGG,G-G substitution rate
+subGT,G-T substitution rate
+subTA,T-A substitution rate
+subTC,T-C substitution rate
+subTG,T-G substitution rate
+subTT,T-T substitution rate
+transition_avg,Transitions (avg)
+transversion_avg,Transversions (avg)
+tree_size,Total branch lengths
