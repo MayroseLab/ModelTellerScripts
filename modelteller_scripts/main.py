@@ -136,7 +136,7 @@ def init_execution(msa_file, results_path, user_tree_file):
 	return msas_list, tree_list
 
 
-def report_results(status_ok=True, results_path="", job_name="", msg=''):
+def report_results(status_ok=True, results_path="", job_name="", msg='', isDailyTest=False):
 
 	i = 0
 	msas_results = []
@@ -145,6 +145,10 @@ def report_results(status_ok=True, results_path="", job_name="", msg=''):
 		msas_results.append(f"{results_path}/msa_{i}.csv")
 		i += 1
 
+	if status_ok:
+		status = 'PASS'
+	else:
+		status = 'FAIL'
 	if not msas_results: # no results
 		if msg == "":
 			msg = "Unknown error occurred. Please contact us for help. We apologize for the inconvenience."
@@ -157,8 +161,11 @@ def report_results(status_ok=True, results_path="", job_name="", msg=''):
 			online_res_path = f"https://modelteller.tau.ac.il/results/{job_name}/output.html"                 
 			with open(results_path + "user_email.txt") as fpr:
 				addressee = fpr.read().strip()
-			notify_by_email(addressee, status_ok, online_res_path, msg=msg + "\nCheck out faliure information at: " + online_res_path)
-                            
+			if not isDailyTest:
+				notify_by_email(addressee, status_ok, online_res_path, msg=msg + "\nCheck out faliure information at: " + online_res_path)
+			else:
+				write_daily_test(job_name, status)
+				
 	else: # at least one result was detected
 		edit_results_html(status_ok, msas_results, f"{results_path}/output.html", run_number=job_name, msg=msg)
 
@@ -166,8 +173,12 @@ def report_results(status_ok=True, results_path="", job_name="", msg=''):
 			online_res_path = f"https://modelteller.tau.ac.il/results/{job_name}/output.html"                 
 			with open(results_path + "user_email.txt") as fpr:
 				addressee = fpr.read().strip()
-			notify_by_email(addressee, status_ok, online_res_path, msg=msg + "\nCheck out your results at: " + online_res_path
+			if not isDailyTest:
+				notify_by_email(addressee, status_ok, online_res_path, msg=msg + "\nCheck out your results at: " + online_res_path
 			                + ".\nModelTeller will now reconstruct a maximum-likelihood tree using the chosen model. This might take some time.")
+			else:
+				write_daily_test(job_name, status)
+				
 
 
 def predict_h2o(ext_df, features_to_include):
@@ -290,6 +301,7 @@ if __name__ == '__main__':
 	parser.add_argument('--run_mode', '-p') # 0 for regular ModelTeller, 1 for a fixed GTR+I+G tree, 2 for a user tree
 	parser.add_argument('--feature_contribution', '-f') # 0 for no, 1 for yes
 	parser.add_argument('--user_tree_file', '-u', default=None) # if p=2
+	parser.add_argument('--daily_test', action='store_true')
 	args = parser.parse_args()
 
 	global JOB_NAME
@@ -329,7 +341,7 @@ if __name__ == '__main__':
 	try:
 		msas_list, trees_list = init_execution(args.msa_filepath, RESULTS_PATH, user_tree_file)
 		main(RESULTS_PATH, msas_list, run_mode, trees_list, prediction_func)
-		report_results(status_ok=True, results_path=RESULTS_PATH, job_name=JOB_NAME, msg=get_results_message() + '\nModelTeller run finished successfully!')
+		report_results(status_ok=True, results_path=RESULTS_PATH, job_name=JOB_NAME, msg=get_results_message() + '\nModelTeller run finished successfully!', isDailyTest=args.daily_test)
 		reconstruct_ml_trees(RESULTS_PATH)
 		if compute_feature_contribution:
 			show_features_contribution_in_html(RESULTS_PATH + "feature_contribution.csv", f"{RESULTS_PATH}output.html")
@@ -338,6 +350,6 @@ if __name__ == '__main__':
 		exc_type, exc_value, exc_traceback = sys.exc_info()
 		traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stdout)
 		report_results(status_ok=False, results_path=RESULTS_PATH, job_name=JOB_NAME,
-					   msg=get_results_message())
+					   msg=get_results_message(), isDailyTest=args.daily_test)
 		# with the following error:\n' + get_error_message())
 		# exc_value should be the relevant one to present to user
